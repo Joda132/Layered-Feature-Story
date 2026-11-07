@@ -30,28 +30,91 @@
         </head>
         <body>
             <h1>L6 · Composition Plan</h1>
-            <p>Complete one row for every positioned, layered, clipped, rounded, or shape-wrapped element. Duplicate rows as needed.</p>
+            <p>One row per enhanced element.</p>
             <table>
                 <thead>
                     <tr>
                         <th>Element</th>
                         <th>Content purpose</th>
-                        <th>Normal-flow baseline</th>
-                        <th>Chosen technique and why</th>
-                        <th>Containing block / stacking context</th>
-                        <th>Fallback or disengagement</th>
+                        <th>Normal flow baseline</th>
+                        <th>Chosen technique</th>
+                        <th>Containing block</th>
+                        <th>Fallback</th>
                         <th>Required test</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Example only</td>
-                        <td>Replace</td>
-                        <td>Replace</td>
-                        <td>Replace</td>
-                        <td>Replace</td>
-                        <td>Replace</td>
-                        <td>Replace</td>
+                        <td><code>.feature-header</code></td>
+                        <td>Title, lede, and badge.</td>
+                        <td>Normal block</td>
+                        <td><code>position: relative</code> to anchor the badge and the bar.</td>
+                        <td>Containing block for the badge and the bar with no context.</td>
+                        <td>none needed</td>
+                        <td>long title</td>
+                    </tr>
+                    <tr>
+                        <td><code>.issue-badge</code></td>
+                        <td>story scope</td>
+                        <td>text after lede</td>
+                        <td>Absolute, top-right. Because the headers top padding keeps it off the title.</td>
+                        <td><code>.feature-header</code>; no context.</td>
+                        <td>Normal flow if unsupported.</td>
+                        <td>viewports, long title.</td>
+                    </tr>
+                    <tr>
+                        <td><code>.feature-header::after</code></td>
+                        <td>Decorative bar.</td>
+                        <td>None.</td>
+                        <td>Absolute <code>pointer-events: none</code>.</td>
+                        <td><code>.feature-header</code> no context.</td>
+                        <td>Nothing lost</td>
+                        <td>Pointer test</td>
+                    </tr>
+                    <tr>
+                        <td><code>.story-layout</code></td>
+                        <td>Guide besside story</td>
+                        <td>Stacked in source order</td>
+                        <td>Grid at 52rem+</td>
+                        <td>No context</td>
+                        <td>One column below 52rem</td>
+                        <td>Viewports are 200% zoom</td>
+                    </tr>
+                    <tr>
+                        <td><code>.story-guide</code></td>
+                        <td>Section links</td>
+                        <td>Links before article.</td>
+                        <td>Flexbox, sticky at 52rem+</td>
+                        <td><code>.story-layout</code>, sticky context</td>
+                        <td>Static below 52rem</td>
+                        <td>Sticky boundaries</td>
+                    </tr>
+                    <tr>
+                        <td><code>figcaption</code></td>
+                        <td>Captions</td>
+                        <td>Text below image</td>
+                        <td>Relative, −3rem margin, <code>--layer-raised</code></td>
+                        <td><code>.feature-figure</code>; 1 context</td>
+                        <td>Below image under 36rem</td>
+                        <td>growth; stacking check</td>
+                    </tr>
+                    <tr>
+                        <td><code>.feature-figure img</code></td>
+                        <td>Braddock library photo</td>
+                        <td>Full rectangle.</td>
+                        <td><code>clip-path: polygon()</code>, slanted bottom</td>
+                        <td>Figure; clip-path context</td>
+                        <td>Full rectangles</td>
+                        <td>clip-path disabled</td>
+                    </tr>
+                    <tr>
+                        <td><code>.shape-portrait</code></td>
+                        <td>Queen Anne library photo.</td>
+                        <td>Block image</td>
+                        <td><code>border-radius: 50%</code>; float with <code>shape-outside, circle(50%)</code>, <code>shape-margin</code></td>
+                        <td><code>section#steps</code>; no context</td>
+                        <td>No float</td>
+                        <td>shape-outside disabled</td>
                     </tr>
                 </tbody>
             </table>
