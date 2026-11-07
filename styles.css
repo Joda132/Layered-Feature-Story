@@ -32,10 +32,8 @@
     --color-border:var(--gray-300);
     --color-action:var(--maroon);
     --color-accent:var(--gold);
-    --radius:.5rem;
     --layer-base:0;
-    --layer-raised:10;
-    --layer-overlay:30;
+    --layer-raised:1;
 }
 
 /* Module 1 reset */
@@ -166,13 +164,6 @@ article section{
 .story-guide a{
     padding:.4rem;
 }
-.feature-figure{
-    position:relative;
-    margin:0;
-    padding:var(--space-md);
-    border:var(--border-thin) solid var(--color-border);
-    border-radius:var(--radius);
-}
 .pull-quote{
     margin:var(--space-lg) 0;
     padding:var(--space-md);
@@ -188,6 +179,27 @@ article section{
     padding:var(--space-md);
     background:var(--color-surface);
 }
+:focus-visible{
+    outline:.2rem solid var(--color-accent);
+    outline-offset:.2rem;
+}
+
+@media (min-width:36rem){
+    .feature-figure figcaption{
+        position:relative;
+        z-index:var(--layer-raised);
+        margin:-3rem 0 0 var(--space-md);
+        padding:.5rem var(--space-md);
+        background:var(--color-surface);
+    }
+    @supports (shape-outside:circle(50%)){
+        .shape-portrait{
+            float:left;
+            shape-outside:circle(50%);
+            shape-margin:var(--space-md);
+        }
+    }
+}
 @media (min-width:52rem){
     .story-layout{
         grid-template-columns:14rem minmax(0,1fr);
@@ -197,18 +209,9 @@ article section{
         inset-block-start:var(--space-md);
         flex-direction:column;
     }
-    @supports (shape-outside:circle(50%)){
-        .shape-portrait{
-            float:inline-start;
-            shape-outside:circle(50%);
-            shape-margin:var(--space-md);}
-        }
+}
+@supports (clip-path:polygon(0 0)){
+    .feature-figure img{
+        clip-path:polygon(0 0,100% 0,100% 90%,0 100%);
     }
-    @supports (clip-path:polygon(0 0)){
-        .feature-figure img{
-            clip-path:polygon(0 0,100% 5%,94% 100%,6% 94%);}
-        }
-        :focus-visible{
-            outline:.2rem solid var(--color-accent);
-            outline-offset:.2rem;
-        }
+}
