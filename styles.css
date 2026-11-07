@@ -110,9 +110,18 @@ html{
 }
 .feature-header{
     position:relative;
-    padding:clamp(2rem,7vw,6rem);
+    padding:4rem clamp(1.5rem,5vw,4rem) clamp(1.5rem,5vw,4rem);
     background:var(--color-action);
     color:var(--white);
+}
+.feature-header::after{
+    content:"";
+    position:absolute;
+    inset-inline:0;
+    inset-block-end:0;
+    height:.5rem;
+    background:var(--color-accent);
+    pointer-events:none;
 }
 .issue-badge{
     position:absolute;
